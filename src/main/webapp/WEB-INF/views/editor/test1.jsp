@@ -14,9 +14,9 @@
 
 	<div class="text">
 
-		<form action="send">
+		<form method="post">
 
-			<textarea id="editor" rows="10" cols="100"></textarea>
+			<textarea id="editor" name="contents" rows="10" cols="100"></textarea>
 
 			<input type="button" id="writeBtn" value="등록">
 
