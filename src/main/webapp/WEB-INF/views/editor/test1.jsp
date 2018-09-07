@@ -15,6 +15,8 @@
 	<div class="text">
 
 		<form method="post">
+		
+			<input type="text" name="title">
 
 			<textarea id="editor" name="contents" rows="10" cols="100"></textarea>
 
