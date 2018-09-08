@@ -1,9 +1,11 @@
 package org.leaf.controller;
 
+import org.leaf.domain.Criteria;
 import org.leaf.domain.EditorVO;
 import org.leaf.mapper.EditorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,12 @@ public class TestController {
 	@Setter(onMethod_=@Autowired)
 	private EditorMapper mapper;
 	
+	@GetMapping("/list")
+	public void list(Criteria cri, Model model) {
+		log.info("list page 들어왔습니다.");
+		model.addAttribute("editorVO",mapper.list(cri));
+	}
+	
 	@GetMapping("/test1")
 	public void editor() {
 		
@@ -35,7 +43,7 @@ public class TestController {
 		log.info(vo);
 		
 		
-		return "redirect:/home";
+		return "redirect:/editor/list";
 		
 	}
 	

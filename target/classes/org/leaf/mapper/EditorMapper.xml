@@ -5,10 +5,15 @@
     
 <mapper namespace="org.leaf.mapper.EditorMapper">
 
+<select id="list" resultType="org.leaf.domain.EditorVO">
+select * from t_editor
+order by eno desc
+</select>
+
 <insert id="write">
 
-insert into t_editor(contents)
-values(#{contents})
+insert into t_editor(title, contents)
+values(#{title},#{contents})
 
 </insert>
 
