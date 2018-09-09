@@ -1,11 +1,16 @@
 package org.leaf.controller;
 
+import java.io.UnsupportedEncodingException;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.leaf.domain.Criteria;
 import org.leaf.domain.EditorVO;
 import org.leaf.mapper.EditorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +28,9 @@ public class TestController {
 	private EditorMapper mapper;
 	
 	@GetMapping("/list")
-	public void list(Criteria cri, Model model) {
+	public void list(Criteria cri, Model model, HttpServletRequest req) throws UnsupportedEncodingException {
 		log.info("list page 들어왔습니다.");
+		req.setCharacterEncoding("utf-8");
 		model.addAttribute("editorVO",mapper.list(cri));
 	}
 	
@@ -36,9 +42,10 @@ public class TestController {
 	}
 	
 	@PostMapping("/test1")
-	public String editorPost(EditorVO vo) {
+	public String editorPost(EditorVO vo, HttpServletRequest req) throws UnsupportedEncodingException {
 
 		log.info("전송버튼 누름");
+		req.setCharacterEncoding("UTF-8");
 		mapper.write(vo);
 		log.info(vo);
 		
