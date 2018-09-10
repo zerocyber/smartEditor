@@ -9,4 +9,5 @@ public interface EditorService {
 
 	public List<EditorVO> editorList(Criteria cri);
 	public int editorWrite(EditorVO vo);
+	public EditorVO editorRead(int eno);
 }

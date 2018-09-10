@@ -16,7 +16,7 @@
 
 					<tr>
 						<td>${list.eno}</td>
-						<td>${list.title}</td>
+						<td><a href="/editor/read?eno=${list.eno}">${list.title}</a></td>
 						<td>${list.regdate}</td>
 
 					</tr>
@@ -25,5 +25,19 @@
 			</tbody>
 		</table>
 	</div>
+	<button id="writeBtn">글쓰기</button>
 </body>
+<script type="text/javascript">
+	window.onload = function() {
+
+		var writeBtn = document.getElementById("writeBtn");
+		console.log(writeBtn);
+
+		writeBtn.onclick = function(){
+			console.log("글쓰기 클릭");
+			location.href = "/editor/test1";
+		}
+
+	}
+</script>
 </html>

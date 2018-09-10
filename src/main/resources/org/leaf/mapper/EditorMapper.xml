@@ -17,4 +17,9 @@ values(#{title},#{contents})
 
 </insert>
 
+<select id="read" resultType="org.leaf.domain.EditorVO">
+select * from t_editor
+where eno = #{eno}
+</select>
+
 </mapper>

@@ -24,4 +24,10 @@ public class EditorServiceImpl implements EditorService{
 	public int editorWrite(EditorVO vo) {
 		return mapper.write(vo);
 	}
+
+	@Override
+	public EditorVO editorRead(int eno) {
+		return mapper.read(eno);
+	}
+	
 }

@@ -9,4 +9,5 @@ public interface EditorMapper {
 
 	public List<EditorVO> list(Criteria cri);
 	public int write(EditorVO vo);
+	public EditorVO read(int eno);
 }
