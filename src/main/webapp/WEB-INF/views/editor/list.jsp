@@ -35,7 +35,7 @@
 
 		writeBtn.onclick = function(){
 			console.log("글쓰기 클릭");
-			location.href = "/editor/test1";
+			location.href = "/editor/write";
 		}
 
 	}

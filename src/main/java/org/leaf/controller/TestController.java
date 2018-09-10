@@ -1,6 +1,6 @@
 package org.leaf.controller;
 
-import java.io.UnsupportedEncodingException;
+
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -30,16 +29,15 @@ public class TestController {
 	private EditorMapper mapper;
 	
 	@GetMapping("/list")
-	public void list(Criteria cri, Model model, HttpServletRequest req) throws UnsupportedEncodingException {
+	public void list(Criteria cri, Model model, HttpServletRequest req){
 		log.info("list page 들어왔습니다.");
-		req.setCharacterEncoding("utf-8");
 		model.addAttribute("editorVO",mapper.list(cri));
 	}
 	
-	@GetMapping("/test1")
+	@GetMapping("/write")
 	public void editor() {
 		
-		log.info("test1 들어왔습니다.");
+		log.info("write 들어왔습니다.");
 		
 	}
 	
