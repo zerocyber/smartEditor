@@ -8,7 +8,6 @@
 
 <script type="text/javascript"
 	src="/resources/editor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
-
 </head>
 <body>
 

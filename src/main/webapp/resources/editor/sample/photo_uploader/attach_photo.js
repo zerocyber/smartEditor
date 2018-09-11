@@ -41,8 +41,8 @@
 				if(!!oNavigator.safari && oNavigator.version <= 5){
 					bSupportDragAndDropAPI = false;
 				}else{
-					//bSupportDragAndDropAPI = true;
-					bSupportDragAndDropAPI = false;
+					bSupportDragAndDropAPI = true;
+					//bSupportDragAndDropAPI = false;
 				}
 			} else {
 				bSupportDragAndDropAPI = false;
@@ -332,14 +332,16 @@
      * @return
      */
     function html5Upload() {	
-    	var tempFile,
-    		sUploadURL;
+    	var tempFile;
+    	var sUploadURL;
     	
-    	sUploadURL= '/upload/mutiplePhotoUpload'; 	// 다중파일 upload URL
+    	sUploadURL= '/multiplePhotoUpload'; 	// 다중파일 upload URL
+    	console.log(sUploadURL);
     	
     	//파일을 하나씩 보내고, 결과를 받음.
     	for(var j=0, k=0; j < nImageInfoCnt; j++) {
     		tempFile = htImageInfo['img'+j];
+    		console.log("tempFile : " + tempFile);
     		try{
 	    		if(!!tempFile){
 	    			//Ajax통신하는 부분. 파일과 업로더할 url을 전달한다.
@@ -351,11 +353,40 @@
     	}
 	}
     
-    function callAjaxForHTML5 (tempFile, sUploadURL){
+    
+    function callAjaxForHTML5(tempFile, sUploadURL){
+    	
+    	var request = new XMLHttpRequest();
+    	
+    	request.open('POST', sUploadURL, /* async = */ false);
+    	
+    	var formData = new FormData();
+    	
+    	formData.append("content-type","multipart/form-data");
+    	formData.append("file-name",encodeURIComponent(tempFile.name));
+    	formData.append("file-size",tempFile.size);
+    	formData.append("file-type",tempFile.type);
+    	formData.append("file",tempFile);
+    	request.send(formData);
+    	
+    	var sResString = request.response;
+    	
+    	if(sResString.indexOf("NOTALLOW_") > -1){
+    		
+    		var sFileName = sResString.replace("NOTALLOW_","");
+    		alert("이미지 파일만 업로드 하실 수 있습니다.");
+    	}else{
+    		makeArrayFromString(sResString);
+    	}
+    }
+    
+/*    function callAjaxForHTML5 (tempFile, sUploadURL){
+    	console.log("callAjaxForHTML5 들어옴");
     	var oAjax = jindo.$Ajax(sUploadURL, {
 			type: 'xhr',
 			method : "post",
 			onload : function(res){ // 요청이 완료되면 실행될 콜백 함수
+				console.log("요청 완료");
 				var sResString = res._response.responseText;
 				if (res.readyState() == 4) {
 					if(sResString.indexOf("NOTALLOW_") > -1){
@@ -375,7 +406,7 @@
 		oAjax.header("file-size",tempFile.size);
 		oAjax.header("file-Type",tempFile.type);
 		oAjax.request(tempFile);
-    }
+    }*/
     
     function makeArrayFromString(sResString){
     	var	aTemp = [],
@@ -469,7 +500,8 @@
      function uploadImage (e){
     	 if(!bSupportDragAndDropAPI){
     		 generalUpload();
-    	 }else{
+    	 }else(bSupportDragAndDropAPI = true)
+    	 {
     		 html5Upload();
     	 }
      }
@@ -482,7 +514,7 @@
 /* 			sUrl  : location.href.replace(/\/[^\/]*$/, '') + '/file_uploader.php',	//샘플 URL입니다.
  	        sCallback : location.href.replace(/\/[^\/]*$/, '') + '/callback.html',	//업로드 이후에 iframe이 redirect될 콜백페이지의 주소
 */ 	    	
- 			surl  : '/upload/photoUpload',
+ 			sUrl  : '/upload/photoUpload',
  			sCallback : '/resources/editor/sample/photo_uploader/callback.html',
  			sFiletype : "*.jpg;*.png;*.bmp;*.gif",						//허용할 파일의 형식. ex) "*", "*.*", "*.jpg", 구분자(;)	
  	    	sMsgNotAllowedExt : 'JPG, GIF, PNG, BMP 확장자만 가능합니다',	//허용할 파일의 형식이 아닌경우에 띄워주는 경고창의 문구
