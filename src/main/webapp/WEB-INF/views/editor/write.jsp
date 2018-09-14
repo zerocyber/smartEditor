@@ -7,7 +7,7 @@
 <title>스마트 에디터</title>
 
 <script type="text/javascript"
-	src="/resources/editor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+	src="/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
 <body>
 

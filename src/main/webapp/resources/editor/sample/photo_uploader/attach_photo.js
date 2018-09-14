@@ -338,32 +338,46 @@
     	sUploadURL= '/multiplePhotoUpload'; 	// 다중파일 upload URL
     	console.log(sUploadURL);
     	
-    	//파일을 하나씩 보내고, 결과를 받음.
-    	for(var j=0, k=0; j < nImageInfoCnt; j++) {
-    		tempFile = htImageInfo['img'+j];
-    		console.log("tempFile : " + tempFile);
-    		try{
-	    		if(!!tempFile){
-	    			//Ajax통신하는 부분. 파일과 업로더할 url을 전달한다.
-	    			callAjaxForHTML5(tempFile,sUploadURL);
-	    			k += 1;
-	    		}
-	    	}catch(e){}
-    		tempFile = null;
-    	}
+    	
+    	setTimeout(function htmlstarted(){
+    		//파일을 하나씩 보내고, 결과를 받음.
+    		for(var j=0, k=0; j < nImageInfoCnt; j++) {
+    			tempFile = htImageInfo['img'+j];
+    			console.log("tempFile : " + tempFile);
+    			try{
+    				if(!!tempFile){
+    					//Ajax통신하는 부분. 파일과 업로더할 url을 전달한다.
+    					sleep(1000);
+    					callAjaxForHTML5(tempFile,sUploadURL);
+    					k += 1;
+    				}
+    			}catch(e){}
+    			tempFile = null;
+    		}
+    	},2000);
 	}
     
+    function sleep(num){
+    	
+    	var now = new Date();
+    	var stop = now.getTime() + num;
+    	while(true){
+    		now = new Date();
+    		if(now.getTime()>stop)return;
+    	}
+    }
     
     function callAjaxForHTML5(tempFile, sUploadURL){
     	
     	var request = new XMLHttpRequest();
     	
-    	request.open('POST', sUploadURL, /* async = */ false);
+    	request.open('POST', sUploadURL, false);
     	
     	var formData = new FormData();
     	
     	formData.append("content-type","multipart/form-data");
     	formData.append("file-name",encodeURIComponent(tempFile.name));
+    	console.log(tempFile);
     	formData.append("file-size",tempFile.size);
     	formData.append("file-type",tempFile.type);
     	formData.append("file",tempFile);
@@ -386,7 +400,6 @@
 			type: 'xhr',
 			method : "post",
 			onload : function(res){ // 요청이 완료되면 실행될 콜백 함수
-				console.log("요청 완료");
 				var sResString = res._response.responseText;
 				if (res.readyState() == 4) {
 					if(sResString.indexOf("NOTALLOW_") > -1){
