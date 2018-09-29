@@ -41,8 +41,8 @@
 				if(!!oNavigator.safari && oNavigator.version <= 5){
 					bSupportDragAndDropAPI = false;
 				}else{
-					bSupportDragAndDropAPI = true;
-					//bSupportDragAndDropAPI = false;
+					/*bSupportDragAndDropAPI = true;*/
+					bSupportDragAndDropAPI = false;
 				}
 			} else {
 				bSupportDragAndDropAPI = false;
@@ -339,7 +339,7 @@
     	console.log(sUploadURL);
     	
     	
-    	setTimeout(function htmlstarted(){
+    	
     		//파일을 하나씩 보내고, 결과를 받음.
     		for(var j=0, k=0; j < nImageInfoCnt; j++) {
     			tempFile = htImageInfo['img'+j];
@@ -347,17 +347,17 @@
     			try{
     				if(!!tempFile){
     					//Ajax통신하는 부분. 파일과 업로더할 url을 전달한다.
-    					sleep(1000);
+    					
     					callAjaxForHTML5(tempFile,sUploadURL);
     					k += 1;
     				}
     			}catch(e){}
     			tempFile = null;
     		}
-    	},2000);
+    	
 	}
     
-    function sleep(num){
+/*    function sleep(num){
     	
     	var now = new Date();
     	var stop = now.getTime() + num;
@@ -392,9 +392,9 @@
     	}else{
     		makeArrayFromString(sResString);
     	}
-    }
+    }*/
     
-/*    function callAjaxForHTML5 (tempFile, sUploadURL){
+    function callAjaxForHTML5 (tempFile, sUploadURL){
     	console.log("callAjaxForHTML5 들어옴");
     	var oAjax = jindo.$Ajax(sUploadURL, {
 			type: 'xhr',
@@ -419,7 +419,7 @@
 		oAjax.header("file-size",tempFile.size);
 		oAjax.header("file-Type",tempFile.type);
 		oAjax.request(tempFile);
-    }*/
+    }
     
     function makeArrayFromString(sResString){
     	var	aTemp = [],
