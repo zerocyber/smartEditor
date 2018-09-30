@@ -338,8 +338,6 @@
     	sUploadURL= '/multiplePhotoUpload'; 	// 다중파일 upload URL
     	console.log(sUploadURL);
     	
-    	
-    	
     		//파일을 하나씩 보내고, 결과를 받음.
     		for(var j=0, k=0; j < nImageInfoCnt; j++) {
     			tempFile = htImageInfo['img'+j];
