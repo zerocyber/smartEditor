@@ -1,1 +1,1 @@
-## Smart Editor (현재 중단)
+## 네이버 Smart Editor 적용 실습
