@@ -1,1 +1,2 @@
-## 네이버 Smart Editor 적용 실습
+## 네이버 Smart Editor
+## https://github.com/zerocyber/teamBoard 저장소 변경
